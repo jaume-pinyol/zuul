@@ -6,6 +6,7 @@
 <%@ page import="org.slf4j.Logger" %>
 <%@ page import="org.slf4j.LoggerFactory" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.netflix.zuul.dependency.cassandra.CassandraHelper" %>
 <%--
   Created by IntelliJ IDEA.
   User: mcohen
@@ -18,7 +19,7 @@
 
     ZuulFilterDAO scriptDAO = null;
     try {
-        scriptDAO = new ZuulFilterDAOCassandra(StartServer.getZuulCassKeyspace());
+        scriptDAO = new ZuulFilterDAOCassandra(CassandraHelper.getInstance().getZuulCassKeyspace());
     } catch (Exception e) {
         LOG.error(e.getMessage(), e);
     }

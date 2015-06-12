@@ -1,5 +1,5 @@
 buildscript {
-    repositories { jcenter() }
+    repositories { jcenter{url "http://jcenter.bintray.com/"} }
     dependencies {
         classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:2.2.0'
     }
@@ -23,7 +23,13 @@ subprojects {
     apply plugin: 'nebula.provided-base'
 
     repositories {
-        jcenter()
+        repositories { jcenter{url "http://jcenter.bintray.com/"} }
+    }
+
+    configurations {
+        all*.exclude group: 'asm', module: 'asm'
+        all*.exclude group: 'asm', module: 'asm-all'
+        all*.exclude group: 'com.netflix.rxjava', module: 'rxjava-core'
     }
 
     group = "com.netflix.${githubProjectName}"

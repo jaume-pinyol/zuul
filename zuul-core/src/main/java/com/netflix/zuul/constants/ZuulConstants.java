@@ -35,6 +35,9 @@ public class ZuulConstants {
     public static final String ZUUL_CASSANDRA_MAXCONNECTIONSPERHOST = "zuul.cassandra.maxConnectionsPerHost";
     public static final String ZUUL_CASSANDRA_HOST = "zuul.cassandra.host";
     public static final String ZUUL_CASSANDRA_PORT = "zuul.cassandra.port";
+    public static final String ZUUL_CASSANDRA_CSQL_VERSION = "zuul.cassandra.csqlVersion";
+    public static final String ZUUL_CASSANDRA_TARGET_VERSION = "zuul.cassandra.targetVersion";
+
     public static final String ZUUL_EUREKA = "zuul.eureka.";
     public static final String ZUUL_AUTODETECT_BACKEND_VIPS = "zuul.autodetect-backend-vips";
     public static final String ZUUL_RIBBON_NAMESPACE = "zuul.ribbon.namespace";
