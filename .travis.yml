@@ -1,12 +1,23 @@
 language: java
 jdk:
 - oraclejdk8
-sudo: false
+
+before_install:
+- git clone git@github.schibsted.io:spt-infrastructure/microservices-devops ./devops.git
 install: "./installViaTravis.sh"
-script: "./buildViaTravis.sh"
+script: "./installViaTravis.sh"
 cache:
   directories:
   - "$HOME/.gradle"
+
+after_success:
+- ls -la ./devops.git/packer/files/zuul
+- ./gradlew war
+- ls -la ./zuul-netflix-webapp/build/libs/
+- rm -rf zuul-netflix-webapp/build/libs/zuul-netflix-webapp-1.0.28.war
+- cp zuul-netflix-webapp/build/libs/zuul-netflix-webapp-*.war ./devops.git/packer/files/zuul/opt/zuul.war
+- ls -la ./devops.git/packer/files/zuul/opt
+- ./devops.git/travis/build-image.sh zuul.json
 env:
   global:
   - secure: h7juR9K39XVDA6j61zW1bkCl2gOLMCngy3dNQRqrArq60fRUZ93g2XE5n3Sp46Uc03y80eJZtTNKG1WMKpd49XJm9pWUSLAIPEi6gc+meYXp1i+/1rTJrSdINYpJ2WV+eUD0/HL8RhMwQpGhFgyOTw6wQacSscbRxnkSP3GqY98=

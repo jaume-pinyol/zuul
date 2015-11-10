@@ -17,6 +17,9 @@ idea {
     }
 }
 
+nebulaRelease {
+    addReleaseBranchPattern("v?\\d+\\.\\d+\\.\\d+(-rc\\d+)?(-schibsted)?")
+}
 subprojects {
     apply plugin: 'nebula.netflixoss'
     apply plugin: 'java'
