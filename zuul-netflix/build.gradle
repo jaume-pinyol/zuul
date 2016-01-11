@@ -9,11 +9,12 @@ dependencies {
     
     compile 'com.netflix.astyanax:astyanax-cassandra:1.56.48'
     compile 'com.netflix.astyanax:astyanax-thrift:1.56.48'
-    compile 'com.netflix.hystrix:hystrix-core:1.4.0-RC4'
-    compile 'com.netflix.ribbon:ribbon-core:0.3.13'
-    compile 'com.netflix.ribbon:ribbon-eureka:0.3.13'
-    compile 'com.netflix.ribbon:ribbon-httpclient:0.3.13'
-    
+    compile 'com.netflix.hystrix:hystrix-core:1.4.22'
+    compile 'com.netflix.ribbon:ribbon-core:2.1.1'
+    compile 'com.netflix.ribbon:ribbon-eureka:2.1.1'
+    compile 'com.netflix.ribbon:ribbon-httpclient:2.1.1'
+    compile 'com.netflix.turbine:turbine-core:1.0.0'
+
     provided 'org.powermock:powermock-api-mockito:1.5.4'
     provided 'junit:junit-dep:4.10'
 }

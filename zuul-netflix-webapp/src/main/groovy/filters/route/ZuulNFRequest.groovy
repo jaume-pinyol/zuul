@@ -50,6 +50,8 @@ import javax.ws.rs.core.MultivaluedMap
 import java.util.zip.GZIPInputStream
 
 import static HttpRequest.Verb
+import org.apache.commons.lang.StringEscapeUtils
+
 
 class ZuulNFRequest extends ZuulFilter {
 
@@ -87,6 +89,7 @@ class ZuulNFRequest extends ZuulFilter {
         }
         //remove double slashes
         uri = uri.replace("//", "/")
+        uri = StringEscapeUtils.escapeHtml(uri)
 
         HttpResponse response = forward(restClient, verb, uri, headers, params, requestEntity)
         setResponse(response)
