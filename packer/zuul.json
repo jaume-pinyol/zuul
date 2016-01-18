@@ -1,0 +1,57 @@
+{
+	"variables": {
+		"aws_access_key": "",
+		"aws_secret_key": "",
+		"ec2_region": "eu-west-1",
+		"ec2_instance_type": "t2.micro",
+		"ec2_source_ami": "ami-a10897d6",
+		"ec2_ssh_username": "ec2-user",
+		"ec2_ssh_timeout": "7m",
+		"basename": "zuul",
+		"creation_time": "{{env `creation_time`}}",
+		"appversion": "{{env `appversion`}}",
+		"creator": "{{env `creator`}}"
+	},
+	"builders": [
+		{
+			"type": "amazon-ebs",
+			"access_key": "{{user `aws_access_key`}}",
+			"secret_key": "{{user `aws_secret_key`}}",
+			"region": "{{user `ec2_region`}}",
+			"source_ami": "{{user `ec2_source_ami`}}",
+			"instance_type": "{{user `ec2_instance_type`}}",
+			"ssh_username": "{{user `ec2_ssh_username`}}",
+			"ssh_timeout": "{{user `ec2_ssh_timeout`}}",
+			"ami_name": "{{user `basename`}}-{{user `appversion`}}",
+			"ami_users" : ["139129115512","493317079362"],
+			"name": "{{user `basename`}}-{{user `appversion`}}",
+			"ami_virtualization_type": "hvm",
+			"enhanced_networking": "true",
+			"ssh_pty" : true,
+			"tags": {
+				"Name": "{{user `basename`}}-{{ isotime \"20060102150405\"}} (builder)",
+				"appversion": "{{user `appversion`}}",
+				"base_ami_version": "{{user `ec2_source_ami`}}",
+				"creation_time":  "{{user `creation_time`}}",
+				"creator": "{{user `creator`}}"
+			}
+		}
+	],
+	"provisioners": [
+		{
+			"type": "file",
+			"source": "files",
+			"destination": "/tmp/zuul"
+		},
+		{
+				"inline":[
+					"sudo cp -R /tmp/zuul/* /; sudo rm -rf /tmp/zuul"
+				],
+				"type":"shell"
+		},
+		{
+			"type": "shell",
+			"script": "zuul.sh"
+		}
+	]
+}
