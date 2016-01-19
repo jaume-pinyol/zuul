@@ -22,6 +22,7 @@ package com.netflix.zuul.constants;
  * Time: 2:22 PM
  */
 public class ZuulConstants {
+    public static final String ZUUL_ARCHAIUS_DYNAMODB_ENABLED = "zuul.archaius.dynamodb.enabled";
     public static final String ZUUL_CASSANDRA_ENABLED = "zuul.cassandra.enabled";
     public static final String ZUUL_NIWS_CLIENTLIST = "zuul.niws.clientlist";
     public static final String DEFAULT_NFASTYANAX_READCONSISTENCY = "default.nfastyanax.readConsistency";

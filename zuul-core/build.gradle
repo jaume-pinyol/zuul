@@ -9,7 +9,7 @@ dependencies {
     provided 'junit:junit-dep:4.10'
     provided 'javax.servlet:servlet-api:2.5'
 
-    compile 'com.netflix.archaius:archaius-core:0.6.0'
+    compile 'com.netflix.archaius:archaius-core:0.7.3'
     compile 'com.netflix.servo:servo-core:0.7.2'
     compile 'com.netflix.netflix-commons:netflix-commons-util:0.1.1'
 }
