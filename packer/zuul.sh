@@ -32,8 +32,12 @@ sleep 1
 sudo yum remove -y java-1.7.0-openjdk
 sleep 1
 cd /tmp
+echo "Installing Java8"
+
 JAVA_URL="http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jre-8u66-linux-x64.rpm"
-wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" $JAVA_URL
+#wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" $JAVA_URL
+curl -L -b "oraclelicense=a" $JAVA_URL -O
+echo "Installing Java8"
 sudo yum install -y jre-8u66-linux-x64.rpm
 sleep 1
 
