@@ -55,4 +55,5 @@ sleep 1
 #
 sudo chkconfig tomcat7 on
 sudo chkconfig --level 345 tomcat7 on
+sudo rm -f /etc/logrotate.d/tomcat7.*
 sleep 1
