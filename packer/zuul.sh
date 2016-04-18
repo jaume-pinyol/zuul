@@ -18,10 +18,6 @@ sudo yum update -y usermode
 sudo chmod 644 /etc/sysctl.conf
 sudo chown root:root /etc/sysctl.conf
 
-# Set Timezone (Europe/Madrid)
-sudo echo -e "ZONE=\"Europe/Madrid\"\nUTC=true" > timezone
-sudo ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
-
 # Install AWS tools
 sudo yum -y install aws-amitools-ec2.noarch
 sleep 1
@@ -55,5 +51,4 @@ sleep 1
 #
 sudo chkconfig tomcat7 on
 sudo chkconfig --level 345 tomcat7 on
-sudo rm -f /etc/logrotate.d/tomcat7.*
 sleep 1

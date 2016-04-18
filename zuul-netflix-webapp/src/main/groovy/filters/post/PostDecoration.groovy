@@ -27,6 +27,8 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -34,6 +36,7 @@ import javax.servlet.http.HttpServletResponse
 import static com.netflix.zuul.constants.ZuulHeaders.*
 
 class Postfilter extends ZuulFilter {
+    private static final Logger LOG = LoggerFactory.getLogger(Postfilter.class);
 
     Postfilter() {
 
@@ -51,8 +54,7 @@ class Postfilter extends ZuulFilter {
 
 
     void addStandardResponseHeaders(HttpServletRequest req, HttpServletResponse res) {
-        println(originatingURL)
-
+        LOG.info(originatingURL)
         String origin = req.getHeader(ORIGIN)
         RequestContext context = RequestContext.getCurrentContext()
         List<Pair<String, String>> headers = context.getZuulResponseHeaders()
@@ -64,7 +66,7 @@ class Postfilter extends ZuulFilter {
 
         if (context.get("ErrorHandled") == null && context.responseStatusCode >= 400) {
             headers.add(new Pair(X_NETFLIX_ERROR_CAUSE, "Error from Origin"))
-            ErrorStatsManager.manager.putStats(RequestContext.getCurrentContext().route, "Error_from_Origin_Server")
+            ErrorStatsManager.manager.putStats(RequestContext.getCurrentContext().route.toString(), "Error_from_Origin_Server")
 
         }
     }

@@ -29,11 +29,15 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 import java.nio.charset.Charset
 import java.util.zip.GZIPInputStream
 import javax.servlet.http.HttpServletResponse
 
 class sendResponse extends ZuulFilter {
+    private static final Logger LOG = LoggerFactory.getLogger(sendResponse.class);
 
     static DynamicBooleanProperty INCLUDE_DEBUG_HEADER =
         DynamicPropertyFactory.getInstance().getBooleanProperty(ZuulConstants.ZUUL_INCLUDE_DEBUG_HEADER, false);
@@ -99,7 +103,7 @@ class sendResponse extends ZuulFilter {
                             inputStream = new GZIPInputStream(is);
 
                         } catch (java.util.zip.ZipException e) {
-                            println("gzip expected but not received assuming unencoded response" + RequestContext.currentContext.getRequest().getRequestURL().toString())
+                            LOG.info("gzip expected but not received assuming unencoded response" + RequestContext.currentContext.getRequest().getRequestURL().toString())
                             inputStream = is
                         }
                     else if (context.getResponseGZipped() && isGzipRequested)
