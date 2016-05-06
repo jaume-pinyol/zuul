@@ -31,10 +31,9 @@ import org.mockito.runners.MockitoJUnitRunner
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+import javax.servlet.http.HttpServletResponse
 import java.nio.charset.Charset
 import java.util.zip.GZIPInputStream
-import javax.servlet.http.HttpServletResponse
-import java.util.zip.ZipException
 
 class sendResponse extends ZuulFilter {
     private static final Logger LOG = LoggerFactory.getLogger(sendResponse.class);
@@ -102,7 +101,7 @@ class sendResponse extends ZuulFilter {
                         try {
                             inputStream = new GZIPInputStream(is);
 
-                        } catch (ZipException e) {
+                        } catch (java.util.zip.ZipException e) {
                             LOG.info("gzip expected but not received assuming unencoded response" + RequestContext.currentContext.getRequest().getRequestURL().toString())
                             inputStream = is
                         }

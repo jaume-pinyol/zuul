@@ -55,18 +55,19 @@ class Postfilter extends ZuulFilter {
 
     void addStandardResponseHeaders(HttpServletRequest req, HttpServletResponse res) {
         LOG.info(originatingURL)
+
         String origin = req.getHeader(ORIGIN)
         RequestContext context = RequestContext.getCurrentContext()
         List<Pair<String, String>> headers = context.getZuulResponseHeaders()
-        headers.add(new Pair(X_ZUUL, "zuul"))
-        headers.add(new Pair(X_ZUUL_INSTANCE, System.getenv("EC2_INSTANCE_ID") ?: "unknown"))
+        //headers.add(new Pair(X_ZUUL, "zuul"))
+        //headers.add(new Pair(X_ZUUL_INSTANCE, System.getenv("EC2_INSTANCE_ID") ?: "unknown"))
         headers.add(new Pair(CONNECTION, KEEP_ALIVE))
-        headers.add(new Pair(X_ZUUL_FILTER_EXECUTION_STATUS, context.getFilterExecutionSummary().toString()))
-        headers.add(new Pair(X_ORIGINATING_URL, originatingURL))
+        //headers.add(new Pair(X_ZUUL_FILTER_EXECUTION_STATUS, com.netflix.zuul.context.getFilterExecutionSummary().toString()))
+        //headers.add(new Pair(X_ORIGINATING_URL, originatingURL))
 
         if (context.get("ErrorHandled") == null && context.responseStatusCode >= 400) {
             headers.add(new Pair(X_NETFLIX_ERROR_CAUSE, "Error from Origin"))
-            ErrorStatsManager.manager.putStats(RequestContext.getCurrentContext().route.toString(), "Error_from_Origin_Server")
+            ErrorStatsManager.manager.putStats(RequestContext.getCurrentContext().route, "Error_from_Origin_Server")
 
         }
     }

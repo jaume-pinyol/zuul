@@ -3,7 +3,9 @@ jdk:
 - oraclejdk8
 
 install: "./installViaTravis.sh"
-script: "./installViaTravis.sh"
+
+script: "./buildViaTravis.sh"
+
 cache:
   directories:
   - "$HOME/.gradle"

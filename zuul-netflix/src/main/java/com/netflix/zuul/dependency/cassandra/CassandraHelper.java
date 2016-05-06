@@ -15,10 +15,6 @@
  */
 package com.netflix.zuul.dependency.cassandra;
 
-import org.apache.commons.configuration.AbstractConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.netflix.astyanax.AstyanaxContext;
 import com.netflix.astyanax.Keyspace;
 import com.netflix.astyanax.connectionpool.NodeDiscoveryType;
@@ -28,8 +24,23 @@ import com.netflix.astyanax.impl.AstyanaxConfigurationImpl;
 import com.netflix.astyanax.thrift.ThriftFamilyFactory;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.config.DynamicPropertyFactory;
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static com.netflix.zuul.constants.ZuulConstants.*;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_FAILOVERWAITTIME;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_MAXCONNSPERHOST;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_MAXFAILOVERCOUNT;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_MAXTIMEOUTWHENEXHAUSTED;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_READCONSISTENCY;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_SOCKETTIMEOUT;
+import static com.netflix.zuul.constants.ZuulConstants.DEFAULT_NFASTYANAX_WRITECONSISTENCY;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_CSQL_VERSION;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_HOST;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_KEYSPACE;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_MAXCONNECTIONSPERHOST;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_PORT;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_TARGET_VERSION;
 
 /**
  * Cassandra helper class that configures Astyanax and gets the keyspace that

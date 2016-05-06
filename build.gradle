@@ -6,20 +6,17 @@ buildscript {
 }
 
 plugins {
-    id 'nebula.netflixoss' version '3.1.2'
+    id 'nebula.netflixoss' version '3.2.3'
 }
 
 ext.githubProjectName = rootProject.name
 
 idea {
     project {
-        languageLevel = '1.7'
+        languageLevel = '1.8'
     }
 }
 
-nebulaRelease {
-    addReleaseBranchPattern("v?\\d+\\.\\d+\\.\\d+(-rc\\d+)?(-schibsted)?")
-}
 subprojects {
     apply plugin: 'nebula.netflixoss'
     apply plugin: 'java'
@@ -37,10 +34,8 @@ subprojects {
 
     group = "com.netflix.${githubProjectName}"
     
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
-
-    sourceSets.test.java.srcDir 'src/main/java'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
     tasks.withType(Javadoc).each {
         it.classpath = sourceSets.main.compileClasspath
@@ -51,9 +46,8 @@ subprojects {
             println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
         }
         testLogging {
-            events "passed", "skipped", "failed"//, "standardOut", "standardError"
+            events "passed", "skipped", "failed", "standardOut", "standardError"
             exceptionFormat = 'full'
-
         }
         maxHeapSize = '512m'
         forkEvery = 1

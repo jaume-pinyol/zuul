@@ -26,22 +26,21 @@ dependencies {
     compile project(':zuul-core')
     compile project(':zuul-netflix')
 
-    compile 'com.netflix.karyon:karyon-core:2.0.02'
-    compile 'com.netflix.karyon:karyon-admin:2.0.02'
-    compile 'com.netflix.karyon:karyon-admin-web:2.0.02'
-    compile 'com.netflix.karyon:karyon-extensions:2.0.02'
-    compile 'com.netflix.blitz4j:blitz4j:1.35'
-    compile 'com.sun.jersey:jersey-core:1.19'
-    compile 'com.sun.jersey:jersey-server:1.19'
-    compile 'com.sun.jersey:jersey-client:1.19'
-    compile 'com.sun.jersey:jersey-servlet:1.19'
-    compile 'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.13'
-    compile 'com.amazonaws:aws-java-sdk-dynamodb:1.10.47'
-    compile 'com.netflix.archaius:archaius-aws:0.7.3'
+    compile "com.netflix.karyon:karyon-core:$karyonVersion"
+    compile "com.netflix.karyon:karyon-admin:$karyonVersion"
+    compile "com.netflix.karyon:karyon-admin-web:$karyonVersion"
+    compile "com.netflix.karyon:karyon-extensions:$karyonVersion"
+    compile 'com.netflix.blitz4j:blitz4j:1.36.1'
+    compile "com.sun.jersey:jersey-core:$jerseyVersion"
+    compile "com.sun.jersey:jersey-server:$jerseyVersion"
+    compile "com.sun.jersey:jersey-client:$jerseyVersion"
+    compile "com.sun.jersey:jersey-servlet:$jerseyVersion"
+    compile "com.netflix.hystrix:hystrix-metrics-event-stream:$hystrixVersion"
+    compile "com.amazonaws:aws-java-sdk-dynamodb:$amazonSdk"
+    compile "com.netflix.archaius:archaius-aws:$archaiusVersion"
 
-
-    compile "org.codehaus.groovy:groovy-all:2.3.6"
-    providedCompile 'junit:junit-dep:4.10'
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    testCompile 'junit:junit-dep:4.11'
 
     runtime 'org.ow2.asm:asm:5.0.3'
     runtime 'org.ow2.asm:asm-all:5.0.3'

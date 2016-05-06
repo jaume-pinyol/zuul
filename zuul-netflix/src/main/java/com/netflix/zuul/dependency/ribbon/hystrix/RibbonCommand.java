@@ -4,21 +4,16 @@ import com.netflix.client.http.HttpRequest;
 import com.netflix.client.http.HttpResponse;
 import com.netflix.config.DynamicPropertyFactory;
 import com.netflix.hystrix.HystrixCommand;
-import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.HystrixCommandProperties;
 import com.netflix.niws.client.http.RestClient;
 import com.netflix.zuul.constants.ZuulConstants;
 import com.netflix.zuul.context.NFRequestContext;
-import com.netflix.zuul.dependency.httpclient.hystrix.HostCommand;
-
-import javax.ws.rs.core.MultivaluedMap;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.core.MultivaluedMap;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;

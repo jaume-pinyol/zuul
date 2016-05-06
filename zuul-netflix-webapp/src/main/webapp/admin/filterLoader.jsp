@@ -1,4 +1,4 @@
-<%@ page import="com.netflix.zuul.StartServer" %>
+<%@ page import="com.netflix.zuul.dependency.cassandra.CassandraHelper" %>
 <%@ page import="com.netflix.zuul.scriptManager.FilterInfo" %>
 <%@ page import="com.netflix.zuul.scriptManager.ZuulFilterDAO" %>
 <%@ page import="com.netflix.zuul.scriptManager.ZuulFilterDAOCassandra" %>
@@ -6,7 +6,6 @@
 <%@ page import="org.slf4j.Logger" %>
 <%@ page import="org.slf4j.LoggerFactory" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.netflix.zuul.dependency.cassandra.CassandraHelper" %>
 <%--
   Created by IntelliJ IDEA.
   User: mcohen

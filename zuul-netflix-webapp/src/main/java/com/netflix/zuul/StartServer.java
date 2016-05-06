@@ -21,31 +21,7 @@ package com.netflix.zuul;
  * Time: 11:14 AM
  */
 
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_ARCHAIUS_DYNAMODB_ENABLED;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_ENABLED;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_CUSTOM_PATH;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_POST_PATH;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_PRE_PATH;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_ROUTING_PATH;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_NIWS_CLIENTLIST;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_NIWS_DEFAULTCLIENT;
-import static com.netflix.zuul.constants.ZuulConstants.ZUUL_RIBBON_NAMESPACE;
-
-import java.io.IOException;
-
-import javax.servlet.ServletContextEvent;
-
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.netflix.config.ConcurrentCompositeConfiguration;
-import com.netflix.config.DynamicConfiguration;
-import com.netflix.config.FixedDelayPollingScheduler;
-import com.netflix.config.sources.DynamoDbConfigurationSource;
-import com.netflix.config.sources.URLConfigurationSource;
-import com.netflix.zuul.guice.AWSModule;
-import org.apache.commons.configuration.AbstractConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Throwables;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -55,10 +31,15 @@ import com.netflix.astyanax.Keyspace;
 import com.netflix.client.ClientException;
 import com.netflix.client.ClientFactory;
 import com.netflix.client.config.DefaultClientConfigImpl;
+import com.netflix.config.ConcurrentCompositeConfiguration;
 import com.netflix.config.ConfigurationManager;
 import com.netflix.config.DynamicBooleanProperty;
+import com.netflix.config.DynamicConfiguration;
 import com.netflix.config.DynamicPropertyFactory;
 import com.netflix.config.DynamicStringProperty;
+import com.netflix.config.FixedDelayPollingScheduler;
+import com.netflix.config.sources.DynamoDbConfigurationSource;
+import com.netflix.config.sources.URLConfigurationSource;
 import com.netflix.karyon.server.KaryonServer;
 import com.netflix.karyon.spi.Application;
 import com.netflix.servo.util.ThreadCpuStats;
@@ -68,6 +49,7 @@ import com.netflix.zuul.dependency.cassandra.CassandraHelper;
 import com.netflix.zuul.dependency.ribbon.RibbonConfig;
 import com.netflix.zuul.groovy.GroovyCompiler;
 import com.netflix.zuul.groovy.GroovyFileFilter;
+import com.netflix.zuul.guice.AWSModule;
 import com.netflix.zuul.monitoring.CounterFactory;
 import com.netflix.zuul.monitoring.TracerFactory;
 import com.netflix.zuul.plugins.Counter;
@@ -79,6 +61,22 @@ import com.netflix.zuul.scriptManager.ZuulFilterDAOCassandra;
 import com.netflix.zuul.scriptManager.ZuulFilterPoller;
 import com.netflix.zuul.stats.AmazonInfoHolder;
 import com.netflix.zuul.stats.monitoring.MonitorRegistry;
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.ServletContextEvent;
+import java.io.IOException;
+
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_ARCHAIUS_DYNAMODB_ENABLED;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_CASSANDRA_ENABLED;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_CUSTOM_PATH;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_POST_PATH;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_PRE_PATH;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_FILTER_ROUTING_PATH;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_NIWS_CLIENTLIST;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_NIWS_DEFAULTCLIENT;
+import static com.netflix.zuul.constants.ZuulConstants.ZUUL_RIBBON_NAMESPACE;
 
 @Application
 public class StartServer extends GuiceServletContextListener {

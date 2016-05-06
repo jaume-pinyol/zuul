@@ -62,7 +62,7 @@ class ErrorResponse extends ZuulFilter {
         } catch (ZuulException e) {
             String cause = e.errorCause
             if (cause == null) cause = "UNKNOWN"
-            RequestContext.getCurrentContext().getResponse().addHeader("X-Netflix-Error-Cause", "Zuul Error: " + cause)
+            RequestContext.getCurrentContext().getResponse().addHeader("X-Schibsted-Error-Cause", "Zuul Error: " + cause)
             if (e.nStatusCode == 404) {
                 ErrorStatsManager.manager.putStats("ROUTE_NOT_FOUND", "")
             } else {
@@ -97,26 +97,6 @@ class ErrorResponse extends ZuulFilter {
         }
 
     }
-    /*
-    JSON/ xml ErrorResponse responses
-
-v=1 or unspecified:
-<status>
-<status_code>status_code</status_code>
-<message>message</message>
-</status>
-
-v=1.5,2.0:
-<status>
-<message>user_id is invalid</message>
-</status>
-
-v=1.5,2.0:
-{"status": {"message": "user_id is invalid"}}
-
-v=1 or unspecified:
-
-     */
 
     String getErrorMessage(Throwable ex, int status_code) {
         String ver = version

@@ -25,7 +25,6 @@ import com.netflix.zuul.context.NFRequestContext
 import com.netflix.zuul.context.RequestContext
 import com.netflix.zuul.dependency.httpclient.hystrix.HostCommand
 import com.netflix.zuul.util.HTTPRequestUtils
-import org.apache.http.*
 import org.apache.http.client.HttpClient
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.client.methods.HttpPut

@@ -18,7 +18,6 @@ package filters.route
 import com.netflix.client.ClientException
 import com.netflix.client.ClientFactory
 import com.netflix.client.IClient
-import com.netflix.client.http.HttpRequest
 import com.netflix.client.http.HttpResponse
 import com.netflix.hystrix.exception.HystrixRuntimeException
 import com.netflix.niws.client.http.RestClient

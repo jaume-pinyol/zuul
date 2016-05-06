@@ -28,13 +28,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+import javax.servlet.http.HttpServletResponse
 import java.nio.charset.Charset
 import java.util.zip.GZIPInputStream
-import javax.servlet.http.HttpServletResponse
 
 class sendResponse extends ZuulFilter {
     private static final Logger LOG = LoggerFactory.getLogger(sendResponse.class);
